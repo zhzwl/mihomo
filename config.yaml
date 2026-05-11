@@ -1,7 +1,13 @@
+mixed-port: 7890
+allow-lan: true
+mode: Rule
+log-level: info
+external-controller: 0.0.0.0:9090
+
 proxies:
   - name: "masque"
     type: masque
-    server: "162.159.198.2"
+    server: "162.159.199.2"
     port: 500
     private-key: "MHcCAQEEILI1eOtnbEIh89Fj4yNDuFR6UjayCKI3NdLl3DhetimWoAoGCCqGSM49AwEHoUQDQgAEgyXrE8v+hHsHy3ewSb3WcRjYgCrM9T9hiE0Uv6k2DZ1+4kefrDT9v1Q/8wdRigTf6t6gGNUV8W+IUMdrfUt+9g=="
     public-key: "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEIaU7MToJm9NKp8YfGxR6r+/h4mcG7SxI8tsW8OR1A5tv/zCzVbCRRh2t87/kxnP6lAy0lkr7qYwu+ox+k3dr6w=="
@@ -12,3 +18,13 @@ proxies:
     remote-dns-resolve: true
     dns: [1.1.1.1, 8.8.8.8]
     congestion-controller: bbr
+
+proxy-groups:
+  - name: "Auto"
+    type: select
+    proxies:
+      - masque
+
+rules:
+  - GEOIP,CN,DIRECT
+  - MATCH,Auto
