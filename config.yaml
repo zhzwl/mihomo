@@ -20,11 +20,11 @@ proxies:
     congestion-controller: bbr
 
 proxy-groups:
-  - name: "Auto"
+  - name: "SELECT"
     type: select
     proxies:
       - masque
 
 rules:
   - GEOIP,CN,DIRECT
-  - MATCH,Auto
+  - MATCH,SELECT
