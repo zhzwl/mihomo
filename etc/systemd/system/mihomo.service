@@ -1,0 +1,12 @@
+[Unit]
+Description=mihomo
+After=network.target
+
+[Service]
+WorkingDirectory=/etc/mihomo/
+ExecStart=/usr/local/bin/mihomo
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
